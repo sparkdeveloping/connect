@@ -10,7 +10,7 @@ import SwiftUI
 struct OnboardingView: View {
     
     // MARK:- variables
-    @StateObject var appModel: AppModel = AppModel()
+    @StateObject var appModel: AuthModel = AuthModel()
     @State var background: Color
     @State var viewAppeared = false
     @EnvironmentObject var navigationModel: NavigationModel

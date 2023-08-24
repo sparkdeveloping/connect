@@ -16,6 +16,9 @@ struct SignUp: View {
     /// Optional, Present If you want to ask OTP for Signup
     @State private var askOTP: Bool = false
     @State private var otpText: String = ""
+    
+    @EnvironmentObject var authModel: AuthModel
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 15, content: {
             /// Back Button
@@ -41,12 +44,21 @@ struct SignUp: View {
             
             VStack(spacing: 25) {
                 /// Custom Text Fields
-                CustomTF(sfIcon: "at", hint: "Email ID", value: $emailID)
+                if let error = authModel.error {
+                    Text(error)
+                        .font(.caption.bold())
+                        .foregroundStyle(.red)
+                        .hSpacing(.leading)
+                }
                 
-                CustomTF(sfIcon: "person", hint: "Full Name", value: $fullName)
+                CustomTF(sfIcon: "person", hint: "Username", value: $authModel.name)
                     .padding(.top, 5)
                 
-                CustomTF(sfIcon: "lock", hint: "Password", isPassword: true, value: $password)
+                CustomTF(sfIcon: "at", hint: "Email", value: $authModel.email)
+                
+             
+                
+                CustomTF(sfIcon: "lock", hint: "Password", isPassword: true, value: $authModel.password)
                     .padding(.top, 5)
                 
                 Text("By signing up, you're agreeing to our **[Terms & Condition](https://apple.com)** and **[Privacy Policy](https://apple.com)**")
@@ -58,11 +70,11 @@ struct SignUp: View {
                 /// SignUp Button
                 GradientButton(title: "Continue", icon: "arrow.right") {
                     /// YOUR CODE
-                    askOTP.toggle()
+                    authModel.register()
                 }
                 .hSpacing(.trailing)
                 /// Disabling Until the Data is Entered
-                .disableWithOpacity(emailID.isEmpty || password.isEmpty || fullName.isEmpty)
+                .disableWithOpacity(authModel.email.isEmpty || authModel.password.isEmpty || authModel.name.isEmpty)
             }
             .padding(.top, 20)
             

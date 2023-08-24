@@ -11,7 +11,7 @@ struct NextButton: View {
     
     // MARK:- variables
     @Binding var background: Color
-    @EnvironmentObject var appModel: AppModel
+    @EnvironmentObject var appModel: AuthModel
     
     // MARK:- views
     var body: some View {

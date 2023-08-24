@@ -10,7 +10,7 @@ import SwiftUI
 struct OnboardingScrollView: View {
     
     // MARK:- variables
-    @EnvironmentObject var appModel: AppModel
+    @EnvironmentObject var appModel: AuthModel
     @EnvironmentObject var navigationModel: NavigationModel
 
     @Binding var backgroundColor: Color
@@ -47,7 +47,7 @@ struct OnboardingScrollView: View {
             GeometryReader { geo in
                 HStack(spacing : 0) {
                     ForEach(Array(zip(appModel.onboardingData.indices, appModel.onboardingData)), id: \.0) {(ix, onboardingData) in
-                        OnboardingPage(selectedIndex: $appModel.currentStep, appModel: appModel, onboardingData: onboardingData, step: ix)
+                        OnboardingPage(selectedIndex: $appModel.currentStep, authModel: appModel, onboardingData: onboardingData, step: ix)
                             .frame(width: UIScreen.main.bounds.width)
                     }
                 }.offset(x: viewOffset)
@@ -152,7 +152,7 @@ struct OnboardingScrollView_Previews: PreviewProvider {
             Color.yellow
                 .edgesIgnoringSafeArea(.all)
             OnboardingScrollView(backgroundColor: .constant(.yellow))
-                .environmentObject(AppModel())
+                .environmentObject(AuthModel())
         }
     }
 }

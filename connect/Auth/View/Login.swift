@@ -19,6 +19,8 @@ struct Login: View {
     @State private var askOTP: Bool = false
     @State private var otpText: String = ""
     @Environment (\.dismiss) var dismiss
+    
+    @EnvironmentObject var authModel: AuthModel
     var body: some View {
         VStack(alignment: .leading, spacing: 15, content: {
             Image(systemName: "xmark")
@@ -41,6 +43,13 @@ struct Login: View {
             
             VStack(spacing: 25) {
                 /// Custom Text Fields
+                if let error = authModel.error {
+                    Text(error)
+                        .font(.caption.bold())
+                        .foregroundStyle(.red)
+                        .hSpacing(.leading)
+                }
+                
                 CustomTF(sfIcon: "at", hint: "Email ID", value: $emailID)
                 
                 CustomTF(sfIcon: "lock", hint: "Password", isPassword: true, value: $password)
@@ -57,7 +66,9 @@ struct Login: View {
                 /// Login Button
                 GradientButton(title: "Login", icon: "arrow.right") {
                     /// YOUR CODE
-                    askOTP.toggle()
+//                    askOTP.toggle()
+                    
+                    authModel.login()
                 }
                 .hSpacing(.trailing)
                 /// Disabling Until the Data is Entered

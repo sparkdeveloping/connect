@@ -15,23 +15,48 @@ struct MainView: View {
     var size: CGSize
     
     var tabs: [String] = ["Quick Find", "Direct"]
+    @StateObject var model: ViewModel
+    @StateObject var locationModel: LocationModel = .init()
+    init(safeArea: EdgeInsets, size: CGSize, user: ConnectUser) {
+        self._model = StateObject(wrappedValue: ViewModel(user: user))
+        self.safeArea = safeArea
+        self.size = size
+    }
     
+    @Environment (\.scenePhase) var scenePhase
+ 
     var body: some View {
        
             TabView(selection: $selected) {
-                HomeView(searchText: $searchText, safeArea: safeArea, size: size)
+                HomeView(size: size)
+                    .environmentObject(model)
                     .tag(0)
-                DirectView()
-                    .tag(1)
+//                DirectView()
+//                    .tag(1)
             }
             .tabViewStyle(.page(indexDisplayMode: .never))
             .ignoresSafeArea()
-            .overlay(alignment: .top) {
-                HeaderView()
+            .onChange(of: scenePhase) { phase in
+                switch phase {
+                    
+                case .background:
+                    break
+                case .inactive:
+                    model.goOffline()
+                case .active:
+                    if let location = locationModel.userLocation {
+                        model.gotOnline(location)
+                    }
+                @unknown default:
+                    break
+                }
             }
-            .overlay(alignment: .bottom) {
-                TabBarView()
-            }
+//            .overlay(alignment: .top) {
+//                HeaderView()
+//            }
+//            .overlay(alignment: .bottom) {
+//                TabBarView()
+//            }
     }
     
     func HeaderView()->some View{

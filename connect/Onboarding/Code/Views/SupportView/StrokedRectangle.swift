@@ -10,7 +10,7 @@ import SwiftUI
 struct StrokedRectangle: View {
     
     // MARK:- variables
-    @EnvironmentObject var appModel: AppModel
+    @EnvironmentObject var appModel: AuthModel
     @Binding var background: Color
     
     let animationDuration: TimeInterval = 0.5
@@ -55,9 +55,9 @@ struct StrokedRectangle: View {
     }
 }
 
-struct StrokedRectange_Previews: PreviewProvider {
-    static var previews: some View {
-        StrokedRectangle(background: .constant(.green))
-            .environmentObject(AppModel())
-    }
-}
+//struct StrokedRectange_Previews: PreviewProvider {
+//    static var previews: some View {
+//        StrokedRectangle(background: .constant(.green))
+//            .environmentObject(AuthModel())
+//    }
+//}

@@ -14,7 +14,7 @@ struct OnboardingPage: View {
     @State var viewAppeared = false
     
     @Binding var selectedIndex: Int
-    @StateObject var appModel: AppModel
+    @StateObject var authModel: AuthModel
     
     let onboardingData: OnboardingMetaData
     var step: Int
@@ -66,9 +66,9 @@ struct OnboardingPage: View {
     // MARK:- functions
     func showOrHideView() {
         Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { _ in
-            if (!viewAppeared && appModel.currentStep == step) {
+            if (!viewAppeared && authModel.currentStep == step) {
                 animate()
-            } else if (viewAppeared && appModel.currentStep != step) {
+            } else if (viewAppeared && authModel.currentStep != step) {
                 DispatchQueue.main.asyncAfter(deadline: .now()) {
                     hide()
                 }

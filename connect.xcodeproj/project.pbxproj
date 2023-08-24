@@ -38,7 +38,7 @@
 		DB2A46C42A8451D200A9D84B /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2A46B42A8451D100A9D84B /* OnboardingView.swift */; };
 		DB2A46C52A8451D200A9D84B /* NextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2A46B62A8451D100A9D84B /* NextButton.swift */; };
 		DB2A46C62A8451D200A9D84B /* StrokedRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2A46B72A8451D100A9D84B /* StrokedRectangle.swift */; };
-		DB2A46C72A8451D200A9D84B /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2A46B92A8451D100A9D84B /* AppModel.swift */; };
+		DB2A46C72A8451D200A9D84B /* AuthModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2A46B92A8451D100A9D84B /* AuthModel.swift */; };
 		DB2A46C82A8451D200A9D84B /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2A46BB2A8451D100A9D84B /* ColorExtensions.swift */; };
 		DB2A46C92A8451D200A9D84B /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2A46BD2A8451D100A9D84B /* Colors.swift */; };
 		DB2A46CE2A84572500A9D84B /* Brain.json in Resources */ = {isa = PBXBuildFile; fileRef = DB2A46CB2A84572500A9D84B /* Brain.json */; };
@@ -59,6 +59,9 @@
 		DB2A46EF2A84722700A9D84B /* LocationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2A46EE2A84722700A9D84B /* LocationModel.swift */; };
 		DB2A46F12A85522200A9D84B /* DirectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2A46F02A85522200A9D84B /* DirectView.swift */; };
 		DB2A46F32A86976D00A9D84B /* TransparentBlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2A46F22A86976D00A9D84B /* TransparentBlurView.swift */; };
+		DB76CBEB2A8F494F00D8D4BC /* AgoraAppGroupDataHelper in Frameworks */ = {isa = PBXBuildFile; productRef = DB76CBEA2A8F494F00D8D4BC /* AgoraAppGroupDataHelper */; };
+		DB76CBED2A8F494F00D8D4BC /* AgoraBroadcastExtensionHelper in Frameworks */ = {isa = PBXBuildFile; productRef = DB76CBEC2A8F494F00D8D4BC /* AgoraBroadcastExtensionHelper */; };
+		DB76CBEF2A8F494F00D8D4BC /* AgoraUIKit in Frameworks */ = {isa = PBXBuildFile; productRef = DB76CBEE2A8F494F00D8D4BC /* AgoraUIKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -93,7 +96,7 @@
 		DB2A46B42A8451D100A9D84B /* OnboardingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		DB2A46B62A8451D100A9D84B /* NextButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NextButton.swift; sourceTree = "<group>"; };
 		DB2A46B72A8451D100A9D84B /* StrokedRectangle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StrokedRectangle.swift; sourceTree = "<group>"; };
-		DB2A46B92A8451D100A9D84B /* AppModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
+		DB2A46B92A8451D100A9D84B /* AuthModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthModel.swift; sourceTree = "<group>"; };
 		DB2A46BB2A8451D100A9D84B /* ColorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
 		DB2A46BD2A8451D100A9D84B /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		DB2A46CB2A84572500A9D84B /* Brain.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Brain.json; sourceTree = "<group>"; };
@@ -124,15 +127,18 @@
 				DB2A46852A834D6500A9D84B /* FirebaseStorageCombine-Community in Frameworks */,
 				DB2A46812A834D6500A9D84B /* FirebaseMessaging in Frameworks */,
 				DB2A46792A834D6500A9D84B /* FirebaseDatabaseSwift in Frameworks */,
+				DB76CBED2A8F494F00D8D4BC /* AgoraBroadcastExtensionHelper in Frameworks */,
 				DB2A46752A834D6500A9D84B /* FirebaseCrashlytics in Frameworks */,
 				DB2A46832A834D6500A9D84B /* FirebaseStorage in Frameworks */,
 				DB2A46712A834D6500A9D84B /* FirebaseAuth in Frameworks */,
 				DB2A46772A834D6500A9D84B /* FirebaseDatabase in Frameworks */,
 				DB2A46732A834D6500A9D84B /* FirebaseAuthCombine-Community in Frameworks */,
+				DB76CBEB2A8F494F00D8D4BC /* AgoraAppGroupDataHelper in Frameworks */,
 				DB2A467B2A834D6500A9D84B /* FirebaseFirestore in Frameworks */,
 				DB2A467D2A834D6500A9D84B /* FirebaseFirestoreCombine-Community in Frameworks */,
 				DB2A467F2A834D6500A9D84B /* FirebaseFirestoreSwift in Frameworks */,
 				DB2A46882A83513400A9D84B /* Lottie in Frameworks */,
+				DB76CBEF2A8F494F00D8D4BC /* AgoraUIKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -292,7 +298,7 @@
 		DB2A46B82A8451D100A9D84B /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				DB2A46B92A8451D100A9D84B /* AppModel.swift */,
+				DB2A46B92A8451D100A9D84B /* AuthModel.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -418,6 +424,9 @@
 				DB2A46822A834D6500A9D84B /* FirebaseStorage */,
 				DB2A46842A834D6500A9D84B /* FirebaseStorageCombine-Community */,
 				DB2A46872A83513400A9D84B /* Lottie */,
+				DB76CBEA2A8F494F00D8D4BC /* AgoraAppGroupDataHelper */,
+				DB76CBEC2A8F494F00D8D4BC /* AgoraBroadcastExtensionHelper */,
+				DB76CBEE2A8F494F00D8D4BC /* AgoraUIKit */,
 			);
 			productName = connect;
 			productReference = DB2A465C2A83496200A9D84B /* connect.app */;
@@ -450,6 +459,7 @@
 			packageReferences = (
 				DB2A466F2A834D6500A9D84B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				DB2A46862A83513400A9D84B /* XCRemoteSwiftPackageReference "lottie-ios" */,
+				DB76CBE92A8F494F00D8D4BC /* XCRemoteSwiftPackageReference "VideoUIKit-iOS" */,
 			);
 			productRefGroup = DB2A465D2A83496200A9D84B /* Products */;
 			projectDirPath = "";
@@ -505,7 +515,7 @@
 				DB2A46E62A845BCA00A9D84B /* OTPVerificationView.swift in Sources */,
 				DB2A46E82A845BCA00A9D84B /* View+Extensions.swift in Sources */,
 				DB2A46A62A8415F600A9D84B /* GeoFire.m in Sources */,
-				DB2A46C72A8451D200A9D84B /* AppModel.swift in Sources */,
+				DB2A46C72A8451D200A9D84B /* AuthModel.swift in Sources */,
 				DB2A46EF2A84722700A9D84B /* LocationModel.swift in Sources */,
 				DB2A46E72A845BCA00A9D84B /* GradientButton.swift in Sources */,
 				DB2A46C32A8451D200A9D84B /* OnboardingScrollView.swift in Sources */,
@@ -651,13 +661,15 @@
 				DEVELOPMENT_TEAM = K48G99PWNM;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "To video cahat";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "To discover and show you places around you.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "To speak in the random chats";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -683,13 +695,15 @@
 				DEVELOPMENT_TEAM = K48G99PWNM;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "To video cahat";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "To discover and show you places around you.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "To speak in the random chats";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -742,6 +756,14 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 4.2.0;
+			};
+		};
+		DB76CBE92A8F494F00D8D4BC /* XCRemoteSwiftPackageReference "VideoUIKit-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AgoraIO-Community/VideoUIKit-iOS.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.1.1;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -806,6 +828,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = DB2A46862A83513400A9D84B /* XCRemoteSwiftPackageReference "lottie-ios" */;
 			productName = Lottie;
+		};
+		DB76CBEA2A8F494F00D8D4BC /* AgoraAppGroupDataHelper */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DB76CBE92A8F494F00D8D4BC /* XCRemoteSwiftPackageReference "VideoUIKit-iOS" */;
+			productName = AgoraAppGroupDataHelper;
+		};
+		DB76CBEC2A8F494F00D8D4BC /* AgoraBroadcastExtensionHelper */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DB76CBE92A8F494F00D8D4BC /* XCRemoteSwiftPackageReference "VideoUIKit-iOS" */;
+			productName = AgoraBroadcastExtensionHelper;
+		};
+		DB76CBEE2A8F494F00D8D4BC /* AgoraUIKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DB76CBE92A8F494F00D8D4BC /* XCRemoteSwiftPackageReference "VideoUIKit-iOS" */;
+			productName = AgoraUIKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

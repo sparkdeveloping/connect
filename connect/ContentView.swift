@@ -12,19 +12,53 @@ struct ContentView: View {
     @State private var showSignup: Bool = false
     /// Keyboard Status
     @State private var isKeyboardShowing: Bool = false
-
+    @StateObject var authModel: AuthModel = .init()
     var body: some View {
         GeometryReader{
             let safeArea = $0.safeAreaInsets
             let size = $0.size
             NavigationStack(path: $navigationModel.path) {
                 ZStack {
+                    if let user = authModel.user {
+                        MainView(safeArea: safeArea, size: size, user: user)
+                        
+                    } else {
+                        Login(showSignup: $showSignup)
+                            .environmentObject(authModel)
+                            .overlay(alignment: showSignup ? .leading:.trailing) {
+                                /// iOS 17 Bounce Animations
+                                if #available(iOS 17, *) {
+                                    /// Since this Project Supports iOS 16 too.
+                                    CircleView()
+                                        .animation(.smooth(duration: 0.45, extraBounce: 0), value: showSignup)
+                                        .animation(.smooth(duration: 0.45, extraBounce: 0), value: isKeyboardShowing)
+                                } else {
+                                    CircleView()
+                                        .animation(.spring(), value: showSignup)
+                                        .animation(.spring(), value: isKeyboardShowing)
+                                }
+                            }
+                            .navigationDestination(isPresented: $showSignup) {
+                                SignUp(showSignup: $showSignup)
+                                    .environmentObject(authModel)
+                            }
+                        /// Checking if any Keyboard is Visible
+                            .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardWillShowNotification), perform: { _ in
+                                /// Disabling it for signup view
+                                if !showSignup {
+                                    isKeyboardShowing = true
+                                }
+                            })
+                            .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardWillHideNotification), perform: { _ in
+                                isKeyboardShowing = false
+                            })
+                    }
                     //                OnboardingView(background: Color.green)
                     //                    .environmentObject(navigationModel)
-                    MainView(safeArea: safeArea, size: size)
+                   
                 }
                 .background {
-                    Color.background
+                    Color.black
                         .ignoresSafeArea()
                 }
                 .navigationDestination(for: String.self) { string in
