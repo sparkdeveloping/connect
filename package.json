@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "heroku-prebuild": "cd connectserver && npm install && npm run build",
+    "heroku-prebuild": "cd connectserver && npm install",
     "start": "cd connectserver && npm start"
   },
   "author": "digitallysavvy",
