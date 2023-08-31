@@ -212,7 +212,6 @@ import Firebase
 
 struct HomeView: View {
     @EnvironmentObject var model: ViewModel
-    @State var joined = false
     
     var size: CGSize
     
@@ -223,7 +222,10 @@ struct HomeView: View {
     
     @State var offset: CGSize = .zero
     @State var showingOnScreenActions = true
-    
+    @State private var shouldBlink = true
+    @State private var opacity = 1.0
+@State var showingReportAlert = false
+    @State var reportMessage = ""
     var name: String {
         switch model.connectionState {
             
@@ -232,7 +234,7 @@ struct HomeView: View {
         case .connecting:
             return "Connecting"
         case .connected:
-            return "username"
+            return model.connectedUser?.name ?? "Unknown User"
         case .disconnected:
             return "Offline"
         }
@@ -337,64 +339,133 @@ struct HomeView: View {
             AgoraVideoView(view: showingLocalVideo ? model.manager.localView:model.manager.remoteView)
                 .simultaneousGesture(onScreenTapGesture)
             LinearGradient(colors: [.black, .black.opacity(0), .black.opacity(0), .black.opacity(0), .black.opacity(0), .black], startPoint: .bottom, endPoint: .top)
-                .opacity(showingOnScreenActions ? 1:0)
+                .opacity(showingOnScreenActions ? 1:model.connectionState == .connected ? 0:1)
                 .simultaneousGesture(onScreenTapGesture)
-            AgoraVideoView(view: showingLocalVideo ? model.manager.remoteView:model.manager.localView)                .frame(width: size.width / 2 - 40, height: size.width / 2 - 40)
-                .clipShape(.rect(cornerRadius: 20, style: .continuous))
-                .shadow(color: .black.opacity(0.2), radius: 10, x: 0, y: 0)
-                .padding()
-                .padding(.vertical, showingOnScreenActions ? 60:0)
-                .opacity(joined ? 1:0.5)
-                .offset(offset)
-                .simultaneousGesture(tapGesture)
-                .simultaneousGesture(dragGesture)
-        
-            VStack {
-                HStack {
-                    Text(name)
-                        .font(.title3.bold())
-                        .foregroundStyle(.white)
-                  Spacer()
-                        Text("Leave")
-                            .font(.title3.bold())
-                            .foregroundStyle(.white)
-                            .frame(height: 40)
-                            .padding(.horizontal, 10)
-                            .background(.linearGradient(colors: [.red, .orange], startPoint: .topLeading, endPoint: .bottom))
-                            .clipShape(.rect(cornerRadius: 15, style: .continuous))
-                }
-                .frame(height: 60)
-                Spacer()
-                HStack {
-                    Image(systemName: "chevron.left")
-                        .font(.largeTitle.bold())
-                        .frame(maxWidth: .infinity)
-                        .foregroundStyle(.gray)
-                    Image(systemName: "gift.fill")
-                        .font(.largeTitle.bold())
-                        .frame(maxWidth: .infinity)
-                        .foregroundStyle(.yellow)
-                    Image(systemName: "chevron.right")
-                        .font(.largeTitle.bold())
-                        .frame(maxWidth: .infinity)
-                        .foregroundStyle(.white)
-                }
-                .frame(height: 60)
-                
+            if model.connectionState != .searching {
+                AgoraVideoView(view: showingLocalVideo ? model.manager.remoteView:model.manager.localView)                .frame(width: size.width / 2 - 40, height: size.width / 2 - 40)
+                    .clipShape(.rect(cornerRadius: 20, style: .continuous))
+                    .shadow(color: .black.opacity(0.2), radius: 10, x: 0, y: 0)
+                    .padding()
+                    .padding(.vertical, showingOnScreenActions ? 60:model.connectionState == .connected ? 0:60)
+                    .opacity(model.connectionState == .connected ? 1:0.5)
+                    .offset(offset)
+                    .simultaneousGesture(tapGesture)
+                    .simultaneousGesture(dragGesture)
             }
-            .opacity(showingOnScreenActions ? 1:0)
-            .padding(.horizontal)
+            if model.connectionState != .disconnected {
+                VStack {
+                    HStack {
+                        VStack(alignment: .leading) {
+                            Text(name)
+                                .font(.title3.bold())
+                                .foregroundStyle(.white)
+                                .italic(model.connectionState != .connected)
+                            //                            .opacity(model.connectionState == .searching ? opacity : 1)
+                                .onAppear {
+                                    if model.connectionState == .searching {
+                                        withAnimation(Animation.easeInOut(duration: 0.5).repeatForever(autoreverses: true)) {
+                                            opacity = 0
+                                        }
+                                    }
+                                }
+                            if let user = model.connectedUser, model.connectionState == .connected {
+                                Text(user.country.isEmpty ? "Someone on Earth":user.country)
+                                    .font(.caption.bold())
+                                    .foregroundStyle(.white)
+                            }
+                        }
+                        Spacer()
+                        Button {
+                            withAnimation {
+                                model.connectionState = .disconnected
+                            }
+                        } label: {
+                            Text("Leave")
+                                .font(.title3.bold())
+                                .foregroundStyle(.white)
+                                .frame(height: 40)
+                                .padding(.horizontal, 10)
+                                .background(.linearGradient(colors: [.red, .orange], startPoint: .topLeading, endPoint: .bottom))
+                                .clipShape(.rect(cornerRadius: 15, style: .continuous))
+                        }
+                    }
+                    .frame(height: 60)
+                    if model.connectionState != .connected {
+                        Spacer()
+                        (Text("Finding fantabulous people\n\n").font(.title.bold()) + Text(model.didYouKnowFacts[Int.random(in: 0..<20)]).italic())
+                    }
+                    Spacer()
+                    if model.connectionState == .connected {
+                        HStack {
+                            Menu {
+                                Button("Sexual content and/or nudity") {
+                                    
+                                }
+                                Button("Harrassment or Bullying") {
+                                    
+                                }
+                                Button("Minor or child") {
+                                    
+                                }
+                                Button("Other") {
+                                    showingReportAlert = true
+                                }
+                            } label: {
+                                Image(systemName: "exclamationmark.octagon.fill")
+                                    .font(.largeTitle.bold())
+                                    .frame(maxWidth: .infinity)
+                                    .foregroundStyle(.gray)
+                                //                            Image(systemName: "gift.fill")
+                                //                                .font(.largeTitle.bold())
+                                //                                .frame(maxWidth: .infinity)
+                                //                                .foregroundStyle(.orange)
+                            }
+                            Color.clear
+                            Button {
+                                withAnimation {
+                                    model.connectionState = .searching
+                                }
+                            } label: {
+                                HStack {
+                                    Text("Next")
+                                        .font(.title.bold())
+                                        .fontDesign(.rounded)
+                                    Image(systemName: "chevron.right")
+                                        .font(.largeTitle.bold())
+                                }
+                                .frame(maxWidth: .infinity)
+                                .foregroundStyle(.white)
+                                .contentShape(.rect)
+                             
+                            }
+                        }
+                        .frame(height: 60)
+                    } else if model.connectionState == .searching {
+                        LoadingView()
+                            .frame(width: 100, height: 100)
+                    }
+                }
+                .opacity(showingOnScreenActions ? 1:model.connectionState == .connected ? 0:1)
+                .padding(.horizontal)
+            }
         }
         .clipShape(.rect(cornerRadius: 14, style: .continuous))
-
-        .onAppear {
-            Task {
-                await self.model.manager.joinChannel() { joined in
-                    self.joined = joined
-                }
+    
+        .alert("What are you reporting about?", isPresented: $showingReportAlert) {
+            TextField("e.g promoting Violence", text: $reportMessage)
+            Button("Cancel") {
+                showingReportAlert = false
             }
+            
+            Button("Report") {
+                showingReportAlert = false
+            }
+        } message: {
+            Text("e.g promoting Violence")
         }
     }
+    
+    
 }
 
 class AgoraManager: NSObject, AgoraRtcEngineDelegate {
@@ -412,13 +483,15 @@ class AgoraManager: NSObject, AgoraRtcEngineDelegate {
     // Update with the temporary token generated in Agora Console.
     
     // Update with the channel name you used to generate the token in Agora Console.
-    var channelName = "test"
+
     
-    let token = "0066f5d8b88c33c4ac7a8501dbf38afbc6dIADTn2msgvTvzShSwoHjufdqgn9Yze4vAMhNJEfz60fPcAx+f9gh39v0IgApexquqCPhZAQAAQDIWOFkAgDIWOFkAwDIWOFkBADIWOFk"
+   
+    
+    var tokenURL = "https://studentsconnect-f319888a67a0.herokuapp.com/"
     
     override init()  {
         super.init()
-        initializeAgoraEngine()
+        self.initializeAgoraEngine()
     }
     
     func initializeAgoraEngine() {
@@ -429,7 +502,77 @@ class AgoraManager: NSObject, AgoraRtcEngineDelegate {
         agoraEngine = AgoraRtcEngineKit.sharedEngine(with: config, delegate: self)
     }
     
+    func fetchToken(
+        tokenType: String = "rtc",
+        channel: String,
+        role: String = "publisher",
+        uid: String = "0",
+        expire: Int = 10000,
+        completion: @escaping (String?, Error?) -> Void
+    ) {
+        // Define the request parameters
+        let params: [String: Any] = [
+            "tokenType": tokenType,
+            "channel": channel,
+            "role": role,
+            "uid": uid,
+            "expire": expire
+        ]
+        
+        // Convert the dictionary to JSON data
+        guard let jsonData = try? JSONSerialization.data(withJSONObject: params) else {
+            completion(nil, NSError(domain: "JSONError", code: 1, userInfo: nil))
+            return
+        }
+        
+        // Create the URL and request
+        if let url = URL(string: "https://studentsconnect-f319888a67a0.herokuapp.com/rtc/\(channel)/publisher/uid/0/?expiry=3600") {
+            
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            
+            // Set the request headers
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            
+            // Attach JSON data to the request body
+            request.httpBody = jsonData
+            
+            // Perform the request
+            let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+                if let error = error {
+                    completion(nil, error)
+                    return
+                }
 
+                if let httpResponse = response as? HTTPURLResponse {
+                    print("statusCode: \(httpResponse.statusCode)")
+                }
+
+                guard let data = data else {
+                    completion(nil, NSError(domain: "NoData", code: 3, userInfo: nil))
+                    return
+                }
+
+                let rawString = String(data: data, encoding: .utf8)
+                print("Raw String: \(rawString ?? "")")
+
+                do {
+                    let json = try JSONSerialization.jsonObject(with: data, options: [])
+                    if let jsonDict = json as? [String: Any],
+                       let token = jsonDict["rtcToken"] as? String {
+                        completion(token, nil)
+                    } else {
+                        completion(nil, NSError(domain: "InvalidResponse", code: 2, userInfo: nil))
+                    }
+                } catch {
+                    completion(nil, error)
+                }
+            }
+            
+            task.resume()
+        }
+    }
+    
     
     func setupLocalVideo() {
         // Enable the video module
@@ -444,7 +587,7 @@ class AgoraManager: NSObject, AgoraRtcEngineDelegate {
         agoraEngine.setupLocalVideo(videoCanvas)
     }
     
-    func joinChannel(joined: @escaping (Bool) ->()) async {
+    func joinChannel(token: String, channel: String, joined: @escaping (Bool) ->()) async {
 //        if await !self.checkForPermissions() {
 //            showMessage(title: "Error", text: "Permissions were not granted")
 //            return
@@ -465,7 +608,7 @@ class AgoraManager: NSObject, AgoraRtcEngineDelegate {
 
         // Join the channel with a temp token. Pass in your token and channel name here
         let result = agoraEngine.joinChannel(
-            byToken: token, channelId: channelName, uid: 0, mediaOptions: option,
+            byToken: token, channelId: channel, uid: 0, mediaOptions: option,
             joinSuccess: { (channel, uid, elapsed) in }
         )
             // Check if joining the channel was successful and set joined Bool accordingly
@@ -498,11 +641,11 @@ class AgoraManager: NSObject, AgoraRtcEngineDelegate {
         task.resume()
       }
   */
-    func leaveChannel() {
+    func leaveChannel(joined: @escaping (Bool) ->()) async {
         agoraEngine.stopPreview()
         let result = agoraEngine.leaveChannel(nil)
         // Check if leaving the channel was successful and set joined Bool accordingly
-//        if result == 0 { joined(f alse) }
+        if result == 0 { joined(false) }
     }
 
     
@@ -551,71 +694,174 @@ class ViewModel: ObservableObject {
     var manager = AgoraManager()
 
     var user: ConnectUser
- 
-    
+
     @Published var lastTimestamp: Double = .zero
     @Published var connectionState: ConnectionState = .disconnected {
         didSet {
-            if connectionState == .searching {
-                searchForAUser()
+            switch connectionState {
+            case .searching:
+                self.cleanAll()
+                self.manager.setupLocalVideo()
+                self.addToWaitingRoom()
+                self.listenForChatRoomUpdates()
+            case .connecting:
+                break
+            case .connected:
+                break
+            case .disconnected:
+                cleanAll()
             }
         }
     }
     
-    
+    var userId: String {
+        return user.id
+    }
     init(user: ConnectUser) {
         self.user = user
-        listenForConnectionRequests()
-        searchForAUser()
+
     }
     
-    func listenForConnectionRequests() {
-        // first, check to see if someone wants to chat
-        connectionState = .searching
-        Database.database().reference().child("connectUsers").child(user.id).child("requesting").observe(.value) { snapshot in
-            if let value = snapshot.value as? String {
-                print("\n\n\n\n\n SNAPSHOT: \(value) \n\n\n\n\n\n\n")
-                Database.database().reference().child("connectUsers").child(value).child("requesting").setValue(self.user.id)
-                self.connectionState = .connecting
-            } else {
-                print("\n\n\n\n\n SNAPSHOT: NON EXISTENT \n\n\n\n\n\n\n")
+    var currentChatId: String?
+    var connectedUser: ConnectUser?
+    
+    let db = Firestore.firestore()
+    var listener: ListenerRegistration? = nil
+    
+    let didYouKnowFacts: [String] = [
+        "That a group of flamingos is called a 'flamboyance'?",
+        "That the shortest war in history was between Britain and Zanzibar on August 27, 1896? Zanzibar surrendered after 38 minutes.",
+        "The 'D' in D-Day stands for 'Day'?",
+        "Cats can't taste sweetness?",
+        "The dot over the letters 'i' and 'j' is called a 'tittle'?",
+        "The longest time between two twins being born is 87 days?",
+        "A 'jiffy' is an actual unit of time? It's 1/100th of a second!",
+        "Honey never spoils?",
+        "The inventor of the frisbee was turned into a frisbee?",
+        "It's impossible to hum while holding your nose?",
+        "The smell of freshly-cut grass is actually a plant distress call?",
+        "An octopus has three hearts?",
+        "Wombat feces are cube-shaped?",
+        "The shortest scientific paper ever published contains zero words?",
+        "The first oranges were not orange but green?",
+        "Snails can sleep for up to 3 years?",
+        "The unicorn is the national animal of Scotland?",
+        "There's enough gold in Earth's core to coat its entire surface in about 1.5 feet of gold?",
+        "A single rainforest can produce 20% of the Earth's oxygen?",
+        "You can't create a folder named 'CON' on a Windows computer?"
+    ]
+    
+    func report(_ message: String) {
+        Firestore.firestore().collection("reportedConnectUsers").document().setData(["reportedID":"", "reason":message, "reporterID":user.id])
+    }
+
+    func removeFromWaitingRoom() {
+        db.collection("connectUsers").document(user.id).updateData(["currentChatRoom":FieldValue.delete()])
+    }
+    func fetchConnectedUser(_ id: String) {
+        Firestore.firestore().collection("connectUsers").document(id).getDocument { snapshot, error in
+            if let _ = error {
                 self.connectionState = .searching
+            }
+            if let snapshot, let data = snapshot.data() {
+                let user = ConnectUser.transformConnectUser(id: snapshot.documentID, data: data)
+                self.connectedUser = user
             }
         }
     }
     
-    func searchForAUser() {
-        // first lets gather all user id-s
-        while connectionState == .searching {
+    func cleanAll() {
+        if let currentChatId {
+            db.collection("chatRooms").document(currentChatId).delete()
+            self.currentChatId = nil
+        }
+        Task {
+            await manager.leaveChannel { _ in
+                //
+            }
+        }
+        db.collection("waitingRoom").document(user.id).delete()
+        listener?.remove()
+        listener = nil
+    }
+    
+    func addToWaitingRoom() {
+        let data: [String: Any] = ["id": user.id, "name": user.name, "timestamp": Timestamp(date: Date()), "email": user.email, "country": user.country]
+        if !userId.isEmpty {
+            db.collection("waitingRoom").document(userId).setData(data)
+//            connectionState = .searching
+        }
+    }
+    
+    func listenForChatRoomUpdates() {
+
+        let userDocRef = db.collection("chatRooms").whereField("userIds", arrayContains: user.id)
+//        self.connectionState = .searching
+        listener = userDocRef.addSnapshotListener { (snapshot, error) in
             
-            Database.database().reference().child("connectUsers").observeSingleEvent(of: .value) { snapshot in
-                if let children = snapshot.children.allObjects as? [DataSnapshot] {
-                    print("\n\n\n\n\n CHILDLREN: \(children) ==== \(children.count) \n\n\n\n\n\n")
-                    var currentIndex = 0
-                    var setDelay: Double = 0
-                    while currentIndex != children.count && self.connectionState == .searching {
-                        self.delay(setDelay) {
-                            print("Searched with delay: \(setDelay)")
-                            if self.connectionState == .searching {
-                                let child = children[currentIndex]
-                                if let value = child.value as? [String: Any], let requesting = value["requesting"] as? String, !requesting.isEmpty {
-                                    setDelay = 0
-                                } else {
-                                    Database.database().reference().child("connectUsers").child(child.key).child("requesting").setValue(self.user.id)
-                                    setDelay = 4
-                                }
-                            }
+            print("we are here")
+
+            guard let snapshot, !snapshot.documents.isEmpty else {
+//                print("Error fetching document: \(error!)")
+             
+                if self.connectionState == .connected {
+                    self.connectionState = .searching
+                }
+                return
+            }
+            print("we are here 2")
+            self.connectionState = .connecting
+
+            if let document = snapshot.documents.first, let users = document.data()["users"] as? [[String: Any]] {
+                let cUsers = users.map { data in
+                    return ConnectUser.transformConnectUser(id: "", data: data)
+                }
+                let user = cUsers.first(where: { $0.id != self.user.id })
+                self.connectedUser = user
+//                self.fetchChatRoom(id: currentChatRoom)
+                self.currentChatId = document.documentID
+                self.connectionState = .connected
+
+                Task {
+                    await self.manager.joinChannel(token: document.data()["token"] as? String ?? "", channel: document.documentID) { joined in
+                        if joined {
+                            self.connectionState = .connected
                         }
                     }
                 }
             }
+            
+            
+//            print("User has been assigned to chat room \(currentChatRoom)")
+
+           
+            
+            // Proceed to chat interface, perhaps?
         }
     }
-    func delay(_ delay:Double, closure:@escaping ()->()) {
-        DispatchQueue.main.asyncAfter(
-            deadline: DispatchTime.now() + Double(Int64(delay *
-        Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: closure)
-    }
+
+//    func fetchChatRoom(id: String) {
+//        let chatRoomRef = db.collection("chatRooms").document(id)
+//        
+//        chatRoomRef.getDocument { snapshot, error in
+//            if let error {
+//                
+//            }
+//            
+//            if let snapshot, let data = snapshot.data(), let token = data["token"] as? String {
+//                Task {
+//                    await self.manager.joinChannel(token: token, channel: id) { joined in
+//                        if joined {
+//                            self.connectionState = .connected
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//
+//    }
+//    
+    
     func gotOnline(_ coordinates: CLLocation) {
         Database.database().reference().child("connectUsers").child(user.id).updateChildValues(["isOnline":true])
         if Date.now.timeIntervalSince1970 - lastTimestamp > 10000 {
@@ -657,5 +903,12 @@ struct AgoraVideoView: UIViewRepresentable {
     }
     func updateUIView(_ uiView: UIViewType, context: Context) {
         //
+    }
+}
+
+struct LoadingView: View {
+    
+    var body: some View {
+        LottieView(name: "Searching")
     }
 }

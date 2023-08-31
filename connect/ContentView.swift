@@ -5,6 +5,7 @@
 //  Created by Denzel Nyatsanza on 8/8/23.
 //
 
+import FirebaseAuth
 import SwiftUI
 
 struct ContentView: View {
@@ -12,18 +13,28 @@ struct ContentView: View {
     @State private var showSignup: Bool = false
     /// Keyboard Status
     @State private var isKeyboardShowing: Bool = false
-    @StateObject var authModel: AuthModel = .init()
+    @StateObject var authModel: AuthModel = .shared
+    
+    @State var override = false
     var body: some View {
-        GeometryReader{
+        GeometryReader {
+            
             let safeArea = $0.safeAreaInsets
             let size = $0.size
+            
             NavigationStack(path: $navigationModel.path) {
                 ZStack {
-                    if let user = authModel.user {
+                    if override {
+                        MainView(safeArea: safeArea, size: size, user: authModel.user!)
+                    } else if let user = authModel.user {
                         MainView(safeArea: safeArea, size: size, user: user)
                         
+                    } else if Auth.auth().currentUser != nil {
+                        LottieView(name: "Globe")
+                            .frame(width: 80, height: 80)
                     } else {
-                        Login(showSignup: $showSignup)
+                        
+                        Login(showSignup: $showSignup, overrideToSignIn: $override)
                             .environmentObject(authModel)
                             .overlay(alignment: showSignup ? .leading:.trailing) {
                                 /// iOS 17 Bounce Animations
@@ -39,7 +50,7 @@ struct ContentView: View {
                                 }
                             }
                             .navigationDestination(isPresented: $showSignup) {
-                                SignUp(showSignup: $showSignup)
+                                SignUp(showSignup: $showSignup, overrideToSignIn: $override)
                                     .environmentObject(authModel)
                             }
                         /// Checking if any Keyboard is Visible
@@ -52,6 +63,7 @@ struct ContentView: View {
                             .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardWillHideNotification), perform: { _ in
                                 isKeyboardShowing = false
                             })
+                         
                     }
                     //                OnboardingView(background: Color.green)
                     //                    .environmentObject(navigationModel)
@@ -62,6 +74,7 @@ struct ContentView: View {
                         .ignoresSafeArea()
                 }
                 .navigationDestination(for: String.self) { string in
+                    /*
                     if string == "login" {
                         Login(showSignup: $showSignup)
                             .overlay(alignment: showSignup ? .leading:.trailing) {
@@ -91,10 +104,22 @@ struct ContentView: View {
                                 isKeyboardShowing = false
                             })
                     }
+                     */
                 }
             }
             .background {
                 Color.background
+            }
+            .overlay {
+                if authModel.isLoading {
+                    ZStack {
+                        Color.black
+                            .ignoresSafeArea()
+                            .opacity(0.6)
+                        LottieView(name: "Globe")
+                            .frame(width: 80, height: 80)
+                    }
+                }
             }
         }
     }

@@ -19,7 +19,8 @@ struct Login: View {
     @State private var askOTP: Bool = false
     @State private var otpText: String = ""
     @Environment (\.dismiss) var dismiss
-    
+    @Binding var overrideToSignIn: Bool
+
     @EnvironmentObject var authModel: AuthModel
     var body: some View {
         VStack(alignment: .leading, spacing: 15, content: {
@@ -68,7 +69,9 @@ struct Login: View {
                     /// YOUR CODE
 //                    askOTP.toggle()
                     
-                    authModel.login()
+                    authModel.login() {
+                        self.overrideToSignIn = true
+                    }
                 }
                 .hSpacing(.trailing)
                 /// Disabling Until the Data is Entered

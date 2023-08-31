@@ -19,6 +19,8 @@ struct SignUp: View {
     
     @EnvironmentObject var authModel: AuthModel
     
+    @Binding var overrideToSignIn: Bool
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 15, content: {
             /// Back Button
@@ -51,14 +53,12 @@ struct SignUp: View {
                         .hSpacing(.leading)
                 }
                 
-                CustomTF(sfIcon: "person", hint: "Username", value: $authModel.name)
+                CustomTF(sfIcon: "person.fill", hint: "Username", value: $authModel.name)
                     .padding(.top, 5)
-                
                 CustomTF(sfIcon: "at", hint: "Email", value: $authModel.email)
-                
-             
-                
-                CustomTF(sfIcon: "lock", hint: "Password", isPassword: true, value: $authModel.password)
+                CustomTF(sfIcon: "globe", hint: "Country", isCountry: true, value: $authModel.country)
+
+                CustomTF(sfIcon: "lock.fill", hint: "Password", isPassword: true, value: $authModel.password)
                     .padding(.top, 5)
                 
                 Text("By signing up, you're agreeing to our **[Terms & Condition](https://apple.com)** and **[Privacy Policy](https://apple.com)**")
@@ -70,7 +70,9 @@ struct SignUp: View {
                 /// SignUp Button
                 GradientButton(title: "Continue", icon: "arrow.right") {
                     /// YOUR CODE
-                    authModel.register()
+                    authModel.register() {
+                        self.overrideToSignIn = true
+                    }
                 }
                 .hSpacing(.trailing)
                 /// Disabling Until the Data is Entered

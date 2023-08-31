@@ -5,6 +5,8 @@
 //  Created by Denzel Nyatsanza on 8/9/23.
 //
 
+import FirebaseFirestore
+import FirebaseAuth
 import SwiftUI
 
 struct MainView: View {
@@ -18,11 +20,11 @@ struct MainView: View {
     @StateObject var model: ViewModel
     @StateObject var locationModel: LocationModel = .init()
     init(safeArea: EdgeInsets, size: CGSize, user: ConnectUser) {
-        self._model = StateObject(wrappedValue: ViewModel(user: user))
+        self._model =  StateObject(wrappedValue: ViewModel(user: user))
         self.safeArea = safeArea
         self.size = size
     }
-    
+    @State var showingDeleteAlert = false
     @Environment (\.scenePhase) var scenePhase
  
     var body: some View {
@@ -51,6 +53,97 @@ struct MainView: View {
                     break
                 }
             }
+            .overlay {
+                if model.connectionState == .disconnected {
+                    ZStack {
+                        Color.black
+                            .opacity(0.9)
+                        (Text("Hey \(model.user.name),\n").font(.largeTitle.bold()).fontDesign(.rounded) + Text("Please keep it real :)\n\n\n").font(.title).fontDesign(.rounded).italic().foregroundColor(.red) + Text("1. No users under the age of 13\n2. No harrasment or bullying.\n3. Strictly No nudity or anything that signifies nudity.\n4. Don't be boring :(").fontWeight(.bold).fontDesign(.rounded))
+                        VStack(alignment: .leading) {
+                            HStack {
+                                Image("ConnectIcon")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 22, height: 22)
+                                    .grayscale(1)
+                                Text("Connect")
+                                    .font(.system(size: 22, weight: .bold, design: .rounded))
+                                    .foregroundColor(.white)
+                                Spacer()
+                                Menu {
+                                    Button("Logout") {
+                                        do {
+                                            try Auth.auth().signOut()
+                                            AuthModel.shared.user = nil
+                                        } catch {}
+                                    }
+                                    Button("Delete My Account") {
+                                        showingDeleteAlert = true
+                                      
+                                    }
+                                    .foregroundColor(.white)
+                                } label: {
+                                    Text("My Account")
+                                        .font(.system(size: 16, weight: .bold, design: .rounded))
+                                        .padding(10)
+                                        .padding(.horizontal, 10)
+                                        .background(Color.white.opacity(0.2))
+                                        .clipShape(.rect(cornerRadius: 17, style: .continuous))
+                                }
+                                .foregroundColor(.white)
+
+                            }
+                            .padding(.horizontal)
+                            Spacer()
+                            Button {
+                                withAnimation {
+                                    model.connectionState = .searching
+                                }
+                            } label : {
+                                Label("Get Chatting", systemImage: "video.fill")
+                                    .font(.title.bold()).fontDesign(.rounded)
+                                    .foregroundStyle(.white)
+                                    .frame(height: 80)
+                                //                                .padding(.bottom, safeArea.bottom)
+                                    .frame(maxWidth: .infinity)
+                                    .background(.linearGradient(colors: [.orange, .red], startPoint: .topLeading, endPoint: .bottom))
+                                    .clipShape(.rect(cornerRadius: 30, style: .continuous))
+                                    .padding(.horizontal)
+                            }
+                        }
+                    }
+                }
+            }
+            .alert("Are you sure you want to delete your account?", isPresented: $showingDeleteAlert, actions: {
+                Button("Cancel") {
+                    showingDeleteAlert = false
+                }
+                Button("Confirm") {
+                    showingDeleteAlert = false
+                    Firestore.firestore().collection("connectUsers").document(model.user.id).delete() { error in
+                        if let error {
+                            print(error.localizedDescription)
+                        }
+                        
+                        do {
+                            try Auth.auth().signOut()
+                            AuthModel.shared.user = nil
+                        } catch {}
+                    }
+                }
+             
+            })
+//            .alert(isPresented: $showingDeleteAlert, error: nil) { _ in
+//                Button("Confirm") {
+//                    
+//                }
+//                Button("Cancel") {
+//                    
+//                }
+//            } message: { _ in
+//                Text("Are you sure you want to delete your account?")
+//            }
+
 //            .overlay(alignment: .top) {
 //                HeaderView()
 //            }
