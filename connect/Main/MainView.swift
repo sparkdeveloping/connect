@@ -58,7 +58,7 @@ struct MainView: View {
                     ZStack {
                         Color.black
                             .opacity(0.9)
-                        (Text("Hey \(model.user.name),\n").font(.largeTitle.bold()).fontDesign(.rounded) + Text("Please keep it real :)\n\n\n").font(.title).fontDesign(.rounded).italic().foregroundColor(.red) + Text("1. No users under the age of 13\n2. No harrasment or bullying.\n3. Strictly No nudity or anything that signifies nudity.\n4. Don't be boring :(").fontWeight(.bold).fontDesign(.rounded))
+                        (Text("Hey \(model.user.name),\n").font(.largeTitle.bold()).fontDesign(.rounded) + Text("Please keep it real :)\n\n\n").font(.title).fontDesign(.rounded).italic().foregroundColor(.orange) + Text("1. No users under the age of 13\n2. No harrasment or bullying.\n3. Strictly No nudity or anything that signifies nudity.\n4. Don't be boring :(").fontWeight(.bold).fontDesign(.rounded))
                         VStack(alignment: .leading) {
                             HStack {
                                 Image("ConnectIcon")
