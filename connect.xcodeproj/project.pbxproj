@@ -119,6 +119,7 @@
 		DB2A46EE2A84722700A9D84B /* LocationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationModel.swift; sourceTree = "<group>"; };
 		DB2A46F02A85522200A9D84B /* DirectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectView.swift; sourceTree = "<group>"; };
 		DB2A46F22A86976D00A9D84B /* TransparentBlurView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransparentBlurView.swift; sourceTree = "<group>"; };
+		DB2F8A152AB4975600713B5B /* connect.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = connect.entitlements; sourceTree = "<group>"; };
 		DBA590272AA1112D00A22811 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DBE0ECE42A9E6E640054CA27 /* Globe.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Globe.json; sourceTree = "<group>"; };
 		DBE0ECE62A9E6F790054CA27 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
@@ -170,6 +171,7 @@
 		DB2A465E2A83496200A9D84B /* connect */ = {
 			isa = PBXGroup;
 			children = (
+				DB2F8A152AB4975600713B5B /* connect.entitlements */,
 				DBE0ECE42A9E6E640054CA27 /* Globe.json */,
 				DBE0ECE82A9E72940054CA27 /* Searching.json */,
 				DB2A46CA2A84571A00A9D84B /* Animations */,
@@ -667,19 +669,21 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = connect/connect.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1.02;
 				DEVELOPMENT_ASSET_PATHS = "\"connect/Preview Content\"";
 				DEVELOPMENT_TEAM = K48G99PWNM;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "The Connect App";
 				INFOPLIST_KEY_NSCameraUsageDescription = "To chat with people on video chat.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "To discover and show you places around you.";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "To speak in the random chats";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -702,19 +706,21 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = connect/connect.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1.02;
 				DEVELOPMENT_ASSET_PATHS = "\"connect/Preview Content\"";
 				DEVELOPMENT_TEAM = K48G99PWNM;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "The Connect App";
 				INFOPLIST_KEY_NSCameraUsageDescription = "To chat with people on video chat.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "To discover and show you places around you.";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "To speak in the random chats";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

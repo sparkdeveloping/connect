@@ -35,10 +35,11 @@ struct Login: View {
             Text("Login")
                 .font(.largeTitle)
                 .fontWeight(.heavy)
-            
+                .fontDesign(.rounded)
             Text("Please sign in to continue")
                 .font(.callout)
                 .fontWeight(.semibold)
+                .fontDesign(.rounded)
                 .foregroundStyle(.gray)
                 .padding(.top, -5)
             
@@ -48,6 +49,7 @@ struct Login: View {
                     Text(error)
                         .font(.caption.bold())
                         .foregroundStyle(.red)
+                        .fontDesign(.rounded)
                         .hSpacing(.leading)
                 }
                 
@@ -60,6 +62,7 @@ struct Login: View {
                     showForgotPasswordView.toggle()
                 }
                 .font(.callout)
+                .fontDesign(.rounded)
                 .fontWeight(.heavy)
                 .tint(.appYellow)
                 .hSpacing(.trailing)
@@ -84,11 +87,12 @@ struct Login: View {
             HStack(spacing: 6) {
                 Text("Don't have an account?")
                     .foregroundStyle(.gray)
-                
-                Button("SignUp") {
+                    .fontDesign(.rounded)
+                Button("Create one here.") {
                     showSignup.toggle()
                 }
                 .fontWeight(.bold)
+                .fontDesign(.rounded)
                 .tint(.appYellow)
             }
             .font(.callout)
