@@ -33,15 +33,17 @@ struct SignUp: View {
             })
             .padding(.top, 10)
             
-            Text("SignUp")
+            Text("Sign Up")
                 .font(.largeTitle)
                 .fontWeight(.heavy)
+                .fontDesign(.rounded)
                 .padding(.top, 25)
-            
+                
             Text("Please sign up to continue")
                 .font(.callout)
                 .fontWeight(.semibold)
                 .foregroundStyle(.gray)
+                .fontDesign(.rounded)
                 .padding(.top, -5)
             
             VStack(spacing: 25) {
@@ -84,12 +86,14 @@ struct SignUp: View {
             
             HStack(spacing: 6) {
                 Text("Already have an account?")
+                    .fontDesign(.rounded)
                     .foregroundStyle(.gray)
                 
                 Button("Login") {
                     showSignup = false
                 }
                 .fontWeight(.bold)
+                .fontDesign(.rounded)
                 .tint(.appYellow)
             }
             .font(.callout)
