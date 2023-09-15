@@ -676,7 +676,7 @@
 				DEVELOPMENT_TEAM = K48G99PWNM;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "The Connect App";
+				INFOPLIST_KEY_CFBundleDisplayName = ConnectApp;
 				INFOPLIST_KEY_NSCameraUsageDescription = "To chat with people on video chat.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "To discover and show you places around you.";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "To speak in the random chats";
@@ -713,7 +713,7 @@
 				DEVELOPMENT_TEAM = K48G99PWNM;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "The Connect App";
+				INFOPLIST_KEY_CFBundleDisplayName = ConnectApp;
 				INFOPLIST_KEY_NSCameraUsageDescription = "To chat with people on video chat.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "To discover and show you places around you.";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "To speak in the random chats";
