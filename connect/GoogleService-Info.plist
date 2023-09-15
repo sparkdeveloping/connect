@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>380320763785-3crdk0d5uddcnlflvticjqbl7juqael8.apps.googleusercontent.com</string>
+	<string>380320763785-e0e75m00t5tjtfvapsvjvsq22iom3kf1.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.380320763785-3crdk0d5uddcnlflvticjqbl7juqael8</string>
+	<string>com.googleusercontent.apps.380320763785-e0e75m00t5tjtfvapsvjvsq22iom3kf1</string>
 	<key>ANDROID_CLIENT_ID</key>
 	<string>380320763785-9h85n3cgfgpv4pf2rlcbovc1mno1chra.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
@@ -15,7 +15,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.sbj.connect</string>
+	<string>com.sbj.connectall</string>
 	<key>PROJECT_ID</key>
 	<string>elixer-sparkdev</string>
 	<key>STORAGE_BUCKET</key>
@@ -31,7 +31,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:380320763785:ios:e4b0638b97d116c9201b58</string>
+	<string>1:380320763785:ios:db1b877f11c639c6201b58</string>
 	<key>DATABASE_URL</key>
 	<string>https://elixer-sparkdev.firebaseio.com</string>
 </dict>

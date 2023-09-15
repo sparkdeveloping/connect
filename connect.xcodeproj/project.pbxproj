@@ -11,7 +11,6 @@
 		DB2A46622A83496200A9D84B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2A46612A83496200A9D84B /* ContentView.swift */; };
 		DB2A46642A83496A00A9D84B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB2A46632A83496A00A9D84B /* Assets.xcassets */; };
 		DB2A46672A83496A00A9D84B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB2A46662A83496A00A9D84B /* Preview Assets.xcassets */; };
-		DB2A466E2A834A5200A9D84B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DB2A466D2A834A5200A9D84B /* GoogleService-Info.plist */; };
 		DB2A46712A834D6500A9D84B /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = DB2A46702A834D6500A9D84B /* FirebaseAuth */; };
 		DB2A46732A834D6500A9D84B /* FirebaseAuthCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = DB2A46722A834D6500A9D84B /* FirebaseAuthCombine-Community */; };
 		DB2A46752A834D6500A9D84B /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = DB2A46742A834D6500A9D84B /* FirebaseCrashlytics */; };
@@ -62,6 +61,7 @@
 		DB76CBEB2A8F494F00D8D4BC /* AgoraAppGroupDataHelper in Frameworks */ = {isa = PBXBuildFile; productRef = DB76CBEA2A8F494F00D8D4BC /* AgoraAppGroupDataHelper */; };
 		DB76CBED2A8F494F00D8D4BC /* AgoraBroadcastExtensionHelper in Frameworks */ = {isa = PBXBuildFile; productRef = DB76CBEC2A8F494F00D8D4BC /* AgoraBroadcastExtensionHelper */; };
 		DB76CBEF2A8F494F00D8D4BC /* AgoraUIKit in Frameworks */ = {isa = PBXBuildFile; productRef = DB76CBEE2A8F494F00D8D4BC /* AgoraUIKit */; };
+		DBA590282AA1112D00A22811 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DBA590272AA1112D00A22811 /* GoogleService-Info.plist */; };
 		DBE0ECE52A9E6E640054CA27 /* Globe.json in Resources */ = {isa = PBXBuildFile; fileRef = DBE0ECE42A9E6E640054CA27 /* Globe.json */; };
 		DBE0ECE72A9E6F790054CA27 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DBE0ECE62A9E6F790054CA27 /* Launch Screen.storyboard */; };
 		DBE0ECE92A9E72940054CA27 /* Searching.json in Resources */ = {isa = PBXBuildFile; fileRef = DBE0ECE82A9E72940054CA27 /* Searching.json */; };
@@ -73,7 +73,6 @@
 		DB2A46612A83496200A9D84B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		DB2A46632A83496A00A9D84B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DB2A46662A83496A00A9D84B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		DB2A466D2A834A5200A9D84B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DB2A468D2A8415F600A9D84B /* GFBase32Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFBase32Utils.h; sourceTree = "<group>"; };
 		DB2A468E2A8415F600A9D84B /* GFGeoHashQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFGeoHashQuery.h; sourceTree = "<group>"; };
 		DB2A468F2A8415F600A9D84B /* GFUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFUtils.h; sourceTree = "<group>"; };
@@ -120,6 +119,7 @@
 		DB2A46EE2A84722700A9D84B /* LocationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationModel.swift; sourceTree = "<group>"; };
 		DB2A46F02A85522200A9D84B /* DirectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectView.swift; sourceTree = "<group>"; };
 		DB2A46F22A86976D00A9D84B /* TransparentBlurView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransparentBlurView.swift; sourceTree = "<group>"; };
+		DBA590272AA1112D00A22811 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DBE0ECE42A9E6E640054CA27 /* Globe.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Globe.json; sourceTree = "<group>"; };
 		DBE0ECE62A9E6F790054CA27 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		DBE0ECE82A9E72940054CA27 /* Searching.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Searching.json; sourceTree = "<group>"; };
@@ -182,8 +182,8 @@
 				DB2A46A82A8415FD00A9D84B /* GeoFire */,
 				DB2A46892A840AAB00A9D84B /* Auth */,
 				DB2A46632A83496A00A9D84B /* Assets.xcassets */,
+				DBA590272AA1112D00A22811 /* GoogleService-Info.plist */,
 				DB2A46E92A84694D00A9D84B /* Main */,
-				DB2A466D2A834A5200A9D84B /* GoogleService-Info.plist */,
 				DB2A46652A83496A00A9D84B /* Preview Content */,
 			);
 			path = connect;
@@ -487,10 +487,10 @@
 				DB2A46CF2A84572500A9D84B /* Nearby.json in Resources */,
 				DB2A46D02A84572500A9D84B /* Students.json in Resources */,
 				DBE0ECE72A9E6F790054CA27 /* Launch Screen.storyboard in Resources */,
-				DB2A466E2A834A5200A9D84B /* GoogleService-Info.plist in Resources */,
 				DB2A46672A83496A00A9D84B /* Preview Assets.xcassets in Resources */,
 				DBE0ECE52A9E6E640054CA27 /* Globe.json in Resources */,
 				DB2A46CE2A84572500A9D84B /* Brain.json in Resources */,
+				DBA590282AA1112D00A22811 /* GoogleService-Info.plist in Resources */,
 				DB2A46642A83496A00A9D84B /* Assets.xcassets in Resources */,
 				DBE0ECE92A9E72940054CA27 /* Searching.json in Resources */,
 			);
@@ -668,33 +668,32 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 1.02;
 				DEVELOPMENT_ASSET_PATHS = "\"connect/Preview Content\"";
 				DEVELOPMENT_TEAM = K48G99PWNM;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_NSCameraUsageDescription = "To video cahat";
+				INFOPLIST_KEY_NSCameraUsageDescription = "To chat with people on video chat.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "To discover and show you places around you.";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "To speak in the random chats";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.sbj.connect;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sbj.connectall;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "/Users/spark/Desktop/connect/connect/connect-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/spark/Desktop/connect/connect/$(PROJECT_NAME)-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -704,33 +703,32 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 1.02;
 				DEVELOPMENT_ASSET_PATHS = "\"connect/Preview Content\"";
 				DEVELOPMENT_TEAM = K48G99PWNM;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_NSCameraUsageDescription = "To video cahat";
+				INFOPLIST_KEY_NSCameraUsageDescription = "To chat with people on video chat.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "To discover and show you places around you.";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "To speak in the random chats";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.sbj.connect;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sbj.connectall;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "/Users/spark/Desktop/connect/connect/connect-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/spark/Desktop/connect/connect/$(PROJECT_NAME)-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

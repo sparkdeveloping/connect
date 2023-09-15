@@ -61,7 +61,7 @@ struct SignUp: View {
                 CustomTF(sfIcon: "lock.fill", hint: "Password", isPassword: true, value: $authModel.password)
                     .padding(.top, 5)
                 
-                Text("By signing up, you're agreeing to our **[Terms & Condition](https://apple.com)** and **[Privacy Policy](https://apple.com)**")
+                Text("By signing up, you're agreeing to our **[Terms & Condition](https://www.freeprivacypolicy.com/live/39b988c5-88f0-43d4-9dcf-28d925050ecc)** and **[Privacy Policy](https://www.freeprivacypolicy.com/live/39b988c5-88f0-43d4-9dcf-28d925050ecc)**")
                     .font(.caption)
                     .tint(.appYellow)
                     .foregroundStyle(.gray)

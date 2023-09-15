@@ -181,10 +181,7 @@ class LocationModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     }
     override init() {
         super.init()
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.startUpdatingLocation()
+//        locati8iy onManager.startUpdatingLocation()
     }
 
     func retrieveGroceries() {

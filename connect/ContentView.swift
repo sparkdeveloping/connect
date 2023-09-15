@@ -63,7 +63,7 @@ struct ContentView: View {
                             .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardWillHideNotification), perform: { _ in
                                 isKeyboardShowing = false
                             })
-                         
+                          
                     }
                     //                OnboardingView(background: Color.green)
                     //                    .environmentObject(navigationModel)
